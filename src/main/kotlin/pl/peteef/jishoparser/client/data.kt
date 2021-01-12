@@ -29,7 +29,7 @@ data class Position(
 )
 
 data class JapaneseWord(
-    val word: String,
+    val word: String?,
     val reading: String
 )
 
