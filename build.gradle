@@ -11,6 +11,9 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "com.github.kittinunf.fuel:fuel:$fuelVersion"
+    implementation "com.github.kittinunf.fuel:fuel-gson:$fuelVersion"
+    implementation "com.google.code.gson:gson:$gsonVersion"
 }
 
 jar {
@@ -23,4 +26,11 @@ jar {
             it.isDirectory() ? it : zipTree(it)
         }
     }
+}
+
+task runJar(type: Exec) {
+    dependsOn build
+    group = "execution"
+    description = "Run the output executable jar with ExecTask"
+    commandLine "java", "-jar", jar.archiveFile.get()
 }
