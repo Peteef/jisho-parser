@@ -3,8 +3,8 @@ package pl.peteef.jishoparser
 import pl.peteef.jishoparser.client.HttpClient
 import pl.peteef.jishoparser.client.JlptLevel
 import pl.peteef.jishoparser.data.WordEntry
-import pl.peteef.jishoparser.export.json.JsonExporter
-import pl.peteef.jishoparser.save.FileSaver
+import pl.peteef.jishoparser.processing.ProcessingType.JSON_TO_FILE
+import pl.peteef.jishoparser.processing.Processor
 
 object App {
     @JvmStatic
@@ -14,8 +14,7 @@ object App {
             .map { WordEntry.fromResponse(it) }
             .toSet()
 
-        val toBeSaved = JsonExporter.export(mapped)
-        FileSaver("json").save(toBeSaved)
+        Processor.process(mapped, JSON_TO_FILE)
         printResults(mapped)
     }
 
