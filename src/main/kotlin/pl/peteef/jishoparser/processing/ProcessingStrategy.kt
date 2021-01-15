@@ -13,6 +13,6 @@ class ProcessingStrategy(
 
     override fun process(data: Set<WordEntry>, filename: String) {
         val toBeSaved = exporter.export(data)
-        if (filename.isBlank()) saver.save(toBeSaved) else saver.save(toBeSaved, filename)
+        saver.save(toBeSaved, filename)
     }
 }

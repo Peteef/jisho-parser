@@ -12,7 +12,7 @@ object Processor {
 
     fun supports(processingType: ProcessingType): Boolean = getStrategy(processingType) !== null
 
-    fun process(data: Set<WordEntry>, processingType: ProcessingType, outputFilename: String = "") {
+    fun process(data: Set<WordEntry>, processingType: ProcessingType, outputFilename: String) {
         getStrategy(processingType)?.process(data, outputFilename)
     }
 
