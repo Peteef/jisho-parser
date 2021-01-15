@@ -4,6 +4,7 @@ import com.xenomachina.argparser.ArgParser
 import com.xenomachina.argparser.default
 import pl.peteef.jishoparser.client.JlptLevel.*
 import pl.peteef.jishoparser.processing.ProcessingType.JSON_TO_FILE
+import pl.peteef.jishoparser.processing.ProcessingType.TEXT_TO_FILE
 import java.time.LocalDateTime
 
 class Arguments(parser: ArgParser) {
@@ -13,8 +14,9 @@ class Arguments(parser: ArgParser) {
 
     val processingType by parser.mapping(
         "--json-to-file" to JSON_TO_FILE,
+        "--text-to-file" to TEXT_TO_FILE,
         help = "processing type"
-    ).default(JSON_TO_FILE)
+    ).default(TEXT_TO_FILE)
 
     val jlptLevel by parser.mapping(
         "--jlpt5" to N5,
