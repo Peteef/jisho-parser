@@ -4,10 +4,10 @@ import pl.peteef.jishoparser.data.WordEntry
 import pl.peteef.jishoparser.export.Exporting
 import pl.peteef.jishoparser.save.Saving
 
-class ProcessingStrategy(
+class ProcessingStrategy<T>(
     private val type: ProcessingType,
-    private val exporter: Exporting,
-    private val saver: Saving
+    private val exporter: Exporting<T>,
+    private val saver: Saving<T>
 ) : Processing {
     override fun isApplicable(processingType: ProcessingType): Boolean = type === processingType
 

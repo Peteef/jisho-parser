@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder
 import pl.peteef.jishoparser.data.WordEntry
 import pl.peteef.jishoparser.export.Exporting
 
-object JsonExporter : Exporting {
+object JsonExporter : Exporting<String> {
     private val serializer: Gson = GsonBuilder().setPrettyPrinting().create()
 
     override fun export(data: Set<WordEntry>): String {

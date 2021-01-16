@@ -1,5 +1,5 @@
 package pl.peteef.jishoparser.save
 
-interface Saving {
-    fun save(data: String, filename: String)
+interface Saving<T> {
+    fun save(data: T, filename: String)
 }

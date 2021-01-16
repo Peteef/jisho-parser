@@ -3,7 +3,7 @@ package pl.peteef.jishoparser.export.text
 import pl.peteef.jishoparser.data.WordEntry
 import pl.peteef.jishoparser.export.Exporting
 
-object TextExporter : Exporting {
+object TextExporter : Exporting<String> {
     override fun export(data: Set<WordEntry>): String {
         val mapped = prepareSort(data)
             .mapIndexed { i, el -> TextWordEntry.fromDomain(el, i) }
