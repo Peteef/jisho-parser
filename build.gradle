@@ -15,6 +15,8 @@ dependencies {
     implementation "com.github.kittinunf.fuel:fuel-gson:$fuelVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "com.xenomachina:kotlin-argparser:$argparserVersion"
+    implementation "org.apache.poi:poi:$poiVersion"
+    implementation "org.apache.poi:poi-ooxml:$poiVersion"
 }
 
 jar {

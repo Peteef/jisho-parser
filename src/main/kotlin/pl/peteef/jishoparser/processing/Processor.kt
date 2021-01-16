@@ -2,15 +2,17 @@ package pl.peteef.jishoparser.processing
 
 import pl.peteef.jishoparser.data.WordEntry
 import pl.peteef.jishoparser.export.json.JsonExporter
+import pl.peteef.jishoparser.export.spreadsheet.SpreadsheetExporter
 import pl.peteef.jishoparser.export.text.TextExporter
-import pl.peteef.jishoparser.processing.ProcessingType.JSON_TO_FILE
-import pl.peteef.jishoparser.processing.ProcessingType.TEXT_TO_FILE
+import pl.peteef.jishoparser.processing.ProcessingType.*
+import pl.peteef.jishoparser.save.ExcelFileSaver
 import pl.peteef.jishoparser.save.FileSaver
 
 object Processor {
     private val strategies: List<Processing> = listOf(
         ProcessingStrategy(JSON_TO_FILE, JsonExporter, FileSaver("json")),
-        ProcessingStrategy(TEXT_TO_FILE, TextExporter, FileSaver("txt"))
+        ProcessingStrategy(TEXT_TO_FILE, TextExporter, FileSaver("txt")),
+        ProcessingStrategy(EXCEL_TO_FILE, SpreadsheetExporter, ExcelFileSaver)
     )
 
     fun supports(processingType: ProcessingType): Boolean = getStrategy(processingType) !== null

@@ -3,8 +3,7 @@ package pl.peteef.jishoparser.cli
 import com.xenomachina.argparser.ArgParser
 import com.xenomachina.argparser.default
 import pl.peteef.jishoparser.client.JlptLevel.*
-import pl.peteef.jishoparser.processing.ProcessingType.JSON_TO_FILE
-import pl.peteef.jishoparser.processing.ProcessingType.TEXT_TO_FILE
+import pl.peteef.jishoparser.processing.ProcessingType.*
 import java.time.LocalDateTime
 
 class Arguments(parser: ArgParser) {
@@ -15,6 +14,7 @@ class Arguments(parser: ArgParser) {
     val processingType by parser.mapping(
         "--json-to-file" to JSON_TO_FILE,
         "--text-to-file" to TEXT_TO_FILE,
+        "--excel-to-file" to EXCEL_TO_FILE,
         help = "processing type"
     ).default(TEXT_TO_FILE)
 
