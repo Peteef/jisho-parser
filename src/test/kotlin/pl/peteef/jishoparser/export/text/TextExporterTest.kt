@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 import singleEntry
 
 internal class TextExporterTest {
-    val exporter = TextExporter
+    private val exporter = TextExporter
 
     @Test
     fun itShouldExportNoEntries() {

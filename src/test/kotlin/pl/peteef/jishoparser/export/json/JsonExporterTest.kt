@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 import singleEntry
 
 internal class JsonExporterTest {
-    val exporter = JsonExporter
+    private val exporter = JsonExporter
 
     @Test
     fun itShouldExportNoEntries() {
