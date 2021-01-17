@@ -1,27 +1,23 @@
 package pl.peteef.jishoparser
 
 import pl.peteef.jishoparser.cli.ArgumentParser.parseArguments
-import pl.peteef.jishoparser.client.HttpClient
-import pl.peteef.jishoparser.data.WordEntry
-import pl.peteef.jishoparser.processing.Processor
+import pl.peteef.jishoparser.cli.Arguments
+import pl.peteef.jishoparser.flow.Controller
+import pl.peteef.jishoparser.flow.ProcessingSettings
+import pl.peteef.jishoparser.flow.SearchCriteria
 
 object App {
     @JvmStatic
     fun main(args: Array<String>) {
         val arguments = parseArguments(args)
-
-        val result = HttpClient.get(arguments.jlptLevel)
-        val mapped = result.flatMap { it.data }
-            .map { WordEntry.fromResponse(it) }
-            .toSet()
-
-        Processor.process(mapped, arguments.processingType, arguments.filename)
-        printResults(mapped)
+        run(arguments)
     }
 
-    private fun printResults(data: Set<WordEntry>) {
-        val toBePrinted = data.sortedBy { it.reading }
-            .joinToString(separator = "\n") { it.toString() }
-        println(toBePrinted)
+    private fun run(arguments: Arguments) {
+        println("Processing...")
+        val searchCriteria = SearchCriteria(arguments.jlptLevel)
+        val processingSettings = ProcessingSettings(arguments.filename, arguments.processingType)
+        Controller.newJob(searchCriteria, processingSettings).perform()
+        println("Done.")
     }
 }
