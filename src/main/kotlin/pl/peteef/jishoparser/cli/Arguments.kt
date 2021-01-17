@@ -8,14 +8,14 @@ import java.time.LocalDateTime
 
 class Arguments(parser: ArgParser) {
     val filename by parser.storing(
-        "-f", "--filename", help = "output filename (without extension)"
+        "-f", "--filename", help = "output filename (without extension) [default result-{timestamp}]"
     ).default("result-${LocalDateTime.now()}")
 
     val processingType by parser.mapping(
         "--json-to-file" to JSON_TO_FILE,
         "--text-to-file" to TEXT_TO_FILE,
         "--excel-to-file" to EXCEL_TO_FILE,
-        help = "processing type"
+        help = "processing type [default --text-to-file]"
     ).default(TEXT_TO_FILE)
 
     val jlptLevel by parser.mapping(
@@ -24,6 +24,6 @@ class Arguments(parser: ArgParser) {
         "--jlpt3" to N3,
         "--jlpt2" to N2,
         "--jlpt1" to N1,
-        help = "JLPT Levels"
+        help = "JLPT Levels [default --jlpt5] (for now only one per run)"
     ).default(N5)
 }
