@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.ss.usermodel.Workbook
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import pl.peteef.jishoparser.data.Entries
 import pl.peteef.jishoparser.data.WordEntry
 import pl.peteef.jishoparser.export.Exporting
 
@@ -12,7 +13,7 @@ object SpreadsheetExporter : Exporting<Workbook> {
     private const val START_ROW = 0
     private const val START_COLUMN = 0
 
-    override fun export(data: Set<WordEntry>): Workbook {
+    override fun export(data: Entries): Workbook {
         val workbook: Workbook = XSSFWorkbook()
         val sheet: Sheet = workbook.createSheet("Vocabulary")
 
@@ -27,8 +28,8 @@ object SpreadsheetExporter : Exporting<Workbook> {
         return workbook
     }
 
-    private fun prepareData(data: Set<WordEntry>): SpreadsheetEntries {
-        val entries = prepareSort(data)
+    private fun prepareData(data: Entries): SpreadsheetEntries {
+        val entries = prepareSort(data.entries)
             .mapIndexed { i, el -> SpreadsheetWordEntry.fromDomain(el, i) }
             .toList()
         return SpreadsheetEntries(entries, entries.count())

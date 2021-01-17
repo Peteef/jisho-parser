@@ -1,6 +1,6 @@
 package pl.peteef.jishoparser.processing
 
-import pl.peteef.jishoparser.data.WordEntry
+import pl.peteef.jishoparser.data.Entries
 import pl.peteef.jishoparser.export.json.JsonExporter
 import pl.peteef.jishoparser.export.spreadsheet.SpreadsheetExporter
 import pl.peteef.jishoparser.export.text.TextExporter
@@ -17,7 +17,7 @@ object Processor {
 
     fun supports(processingType: ProcessingType): Boolean = getStrategy(processingType) !== null
 
-    fun process(data: Set<WordEntry>, processingType: ProcessingType, outputFilename: String) {
+    fun process(data: Entries, processingType: ProcessingType, outputFilename: String) {
         getStrategy(processingType)?.process(data, outputFilename)
     }
 

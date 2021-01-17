@@ -1,7 +1,7 @@
 package pl.peteef.jishoparser.export
 
-import pl.peteef.jishoparser.data.WordEntry
+import pl.peteef.jishoparser.data.Entries
 
 interface Exporting<T> {
-    fun export(data: Set<WordEntry>): T
+    fun export(data: Entries): T
 }

@@ -1,6 +1,5 @@
 package pl.peteef.jishoparser.export.json
 
-import pl.peteef.jishoparser.client.Position
 import pl.peteef.jishoparser.data.WordEntry
 
 data class JsonEntries(
