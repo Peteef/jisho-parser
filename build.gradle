@@ -17,6 +17,9 @@ dependencies {
     implementation "com.xenomachina:kotlin-argparser:$argparserVersion"
     implementation "org.apache.poi:poi:$poiVersion"
     implementation "org.apache.poi:poi-ooxml:$poiVersion"
+
+    testImplementation platform("org.junit:junit-bom:$junitVersion")
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
 }
 
 jar {
@@ -36,4 +39,11 @@ task runJar(type: Exec) {
     group = "execution"
     description = "Run the output executable jar with ExecTask"
     commandLine "java", "-jar", jar.archiveFile.get()
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
