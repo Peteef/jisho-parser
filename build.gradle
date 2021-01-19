@@ -20,6 +20,7 @@ dependencies {
 
     testImplementation platform("org.junit:junit-bom:$junitVersion")
     testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+    testImplementation "io.mockk:mockk:$mockkVersion"
 }
 
 jar {

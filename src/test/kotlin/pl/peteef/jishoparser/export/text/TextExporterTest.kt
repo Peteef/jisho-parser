@@ -1,10 +1,10 @@
 package pl.peteef.jishoparser.export.text
 
-import multipleEntries
-import noEntries
+import pl.peteef.jishoparser.test.multipleEntries
+import pl.peteef.jishoparser.test.noEntries
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import singleEntry
+import pl.peteef.jishoparser.test.singleEntry
 
 internal class TextExporterTest {
     private val exporter = TextExporter
