@@ -14,7 +14,7 @@ At this moment it works as CLI application and provides a file output. This may 
 ### Requirements
 ```Java >= 8```
 
-###Getting
+### Getting
 ```git clone https://github.com/Peteef/jisho-parser.git``` (if you have Git) or just *Download ZIP*.
 
 ### Running
