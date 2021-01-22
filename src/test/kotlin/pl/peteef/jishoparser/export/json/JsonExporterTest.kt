@@ -1,9 +1,10 @@
 package pl.peteef.jishoparser.export.json
 
+import pl.peteef.jishoparser.test.multipleEntries
+import pl.peteef.jishoparser.test.noEntries
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import pl.peteef.jishoparser.data.Entries
-import pl.peteef.jishoparser.test.*
+import pl.peteef.jishoparser.test.singleEntry
 
 internal class JsonExporterTest {
     private val exporter = JsonExporter
@@ -36,7 +37,8 @@ internal class JsonExporterTest {
             |      "types": [
             |        "type1",
             |        "type2"
-            |      ]
+            |      ],
+            |      "jlpt": "JLPT-N5"
             |    }
             |  ],
             |  "count": 1
@@ -62,7 +64,8 @@ internal class JsonExporterTest {
             |      "types": [
             |        "type1",
             |        "type2"
-            |      ]
+            |      ],
+            |      "jlpt": "JLPT-N5"
             |    },
             |    {
             |      "id": 1,
@@ -75,13 +78,28 @@ internal class JsonExporterTest {
             |      "types": [
             |        "type1",
             |        "type2"
-            |      ]
+            |      ],
+            |      "jlpt": "JLPT-N5"
+            |    },
+            |    {
+            |      "id": 2,
+            |      "reading": "anotherLevelReading",
+            |      "kanji": "anotherLevelEntryId",
+            |      "definitions": [
+            |        "definition1",
+            |        "definition2"
+            |      ],
+            |      "types": [
+            |        "type1",
+            |        "type2"
+            |      ],
+            |      "jlpt": "JLPT-N4"
             |    }
             |  ],
-            |  "count": 2
+            |  "count": 3
             |}
         """.trimMargin()
-        val result = exporter.export(Entries(setOf(sampleEntry, anotherEntry)))
+        val result = exporter.export(multipleEntries)
         Assertions.assertEquals(expected, result)
     }
 }

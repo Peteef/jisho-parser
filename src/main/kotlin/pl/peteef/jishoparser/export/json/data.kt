@@ -1,5 +1,6 @@
 package pl.peteef.jishoparser.export.json
 
+import pl.peteef.jishoparser.client.JlptLevel
 import pl.peteef.jishoparser.data.WordEntry
 
 data class JsonEntries(
@@ -12,16 +13,18 @@ data class JsonWordEntry(
     val reading: String,
     val kanji: String,
     val definitions: Set<String>,
-    val types: Set<String>
+    val types: Set<String>,
+    val jlpt: JlptLevel
 ) {
     companion object {
-        fun fromDomain(responseValue: WordEntry, id: Int): JsonWordEntry {
+        fun fromDomain(domain: WordEntry, id: Int): JsonWordEntry {
             return JsonWordEntry(
                 id,
-                responseValue.reading,
-                if (responseValue.word.isEmpty()) responseValue.word else responseValue.id,
-                responseValue.definitions,
-                responseValue.types
+                domain.reading,
+                if (domain.word.isEmpty()) domain.word else domain.id,
+                domain.definitions,
+                domain.types,
+                domain.jlpt
             )
         }
     }

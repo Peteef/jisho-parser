@@ -17,7 +17,7 @@ object JsonExporter : Exporting<String> {
     }
 
     private fun prepareSort(data: Set<WordEntry>): List<WordEntry> {
-        return data.sortedBy { it.reading }
+        return data.sortedWith(compareBy({ it.jlpt }, { it.reading }))
     }
 
     private fun serialize(toBeSerialized: JsonEntries): String = serializer.toJson(toBeSerialized)
