@@ -6,8 +6,12 @@ object HttpClient {
     private const val HASH_CODE = "%23"
     private const val BASE_PATH = "https://jisho.org/api/v1"
 
-    fun get(jlptLevel: JlptLevel): List<PageEntity> {
-        return getAllPages(composeUrl(jlptLevel))
+    fun get(jlptLevels: Set<JlptLevel>): Map<JlptLevel, List<PageEntity>> {
+        return getAllLevels(jlptLevels)
+    }
+
+    private fun getAllLevels(jlptLevels: Set<JlptLevel>): Map<JlptLevel, List<PageEntity>> {
+        return jlptLevels.map { it to getAllPages(composeUrl(it)) }.toMap()
     }
 
     private fun composeUrl(jlptLevel: JlptLevel) = "$BASE_PATH/search/words?keyword=$HASH_CODE${jlptLevel.value}"

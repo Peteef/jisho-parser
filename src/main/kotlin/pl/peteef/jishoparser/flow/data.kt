@@ -4,7 +4,7 @@ import pl.peteef.jishoparser.client.JlptLevel
 import pl.peteef.jishoparser.processing.ProcessingType
 
 data class SearchCriteria(
-    val jlptLevel: JlptLevel
+    val jlptLevel: Set<JlptLevel>
 )
 
 data class ProcessingSettings(
