@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.ss.usermodel.Workbook
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import pl.peteef.jishoparser.client.JlptLevel
 import pl.peteef.jishoparser.data.Entries
 import pl.peteef.jishoparser.data.WordEntry
 import pl.peteef.jishoparser.export.Exporting
@@ -15,28 +16,35 @@ object SpreadsheetExporter : Exporting<Workbook> {
 
     override fun export(data: Entries): Workbook {
         val workbook: Workbook = XSSFWorkbook()
-        val sheet: Sheet = workbook.createSheet("Vocabulary")
 
-        val styles = SpreadsheetStyles(workbook)
-
-        formatCells(sheet)
-        createHeader(sheet, styles)
-
-        val mapped = prepareData(data)
-        insertData(mapped, sheet, styles)
+        val mappedPerLevel = prepareData(data)
+        mappedPerLevel.data.forEach {
+            createSheet(workbook, it)
+        }
 
         return workbook
     }
 
     private fun prepareData(data: Entries): SpreadsheetEntries {
-        val entries = prepareSort(data.entries)
-            .mapIndexed { i, el -> SpreadsheetWordEntry.fromDomain(el, i) }
-            .toList()
-        return SpreadsheetEntries(entries, entries.count())
+        val entries = data.entries
+            .groupBy { it.jlpt }
+            .map { withLevel(it) }
+            .toMap()
+            .toSortedMap()
+        return SpreadsheetEntries(entries)
     }
 
-    private fun prepareSort(data: Set<WordEntry>): List<WordEntry> {
-        return data.sortedBy { it.reading }
+    private fun withLevel(preMapped: Map.Entry<JlptLevel, List<WordEntry>>): Pair<JlptLevel, List<SpreadsheetWordEntry>> {
+        return preMapped.key to preMapped.value.sortedBy { it.reading }
+            .mapIndexed { i, el -> SpreadsheetWordEntry.fromDomain(el, i) }
+    }
+
+    private fun createSheet(workbook: Workbook, entriesPerLevel: Map.Entry<JlptLevel, List<SpreadsheetWordEntry>>) {
+        val sheet: Sheet = workbook.createSheet("${entriesPerLevel.key} Vocabulary")
+        val styles = SpreadsheetStyles(workbook)
+        formatCells(sheet)
+        createHeader(sheet, styles)
+        insertData(entriesPerLevel.value, sheet, styles)
     }
 
     private fun formatCells(sheet: Sheet) {
@@ -71,8 +79,8 @@ object SpreadsheetExporter : Exporting<Workbook> {
         typesCell.cellStyle = styles.headerStyle
     }
 
-    private fun insertData(entries: SpreadsheetEntries, sheet: Sheet, styles: SpreadsheetStyles) {
-        entries.data.forEach {
+    private fun insertData(entries: List<SpreadsheetWordEntry>, sheet: Sheet, styles: SpreadsheetStyles) {
+        entries.forEach {
             e -> createDataRow(e, sheet, styles)
         }
     }

@@ -1,10 +1,10 @@
 package pl.peteef.jishoparser.export.spreadsheet
 
+import pl.peteef.jishoparser.client.JlptLevel
 import pl.peteef.jishoparser.data.WordEntry
 
 data class SpreadsheetEntries(
-    val data: List<SpreadsheetWordEntry>,
-    val count: Int,
+    val data: Map<JlptLevel, List<SpreadsheetWordEntry>>
 )
 
 data class SpreadsheetWordEntry(

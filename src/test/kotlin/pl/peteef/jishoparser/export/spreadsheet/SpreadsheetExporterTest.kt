@@ -14,26 +14,27 @@ internal class SpreadsheetExporterTest {
     @Test
     fun itShouldExportNoEntries() {
         val result = exporter.export(noEntries)
-        val sheet = result.getSheet("Vocabulary")
-        assertHeader(sheet)
-        assertRow(sheet, 2)
+        assertEquals(0, result.numberOfSheets)
     }
 
     @Test
     fun itShouldExportSingleEntry() {
         val result = exporter.export(singleEntry)
-        val sheet = result.getSheet("Vocabulary")
+        val sheet = result.getSheet("N5 Vocabulary")
         assertHeader(sheet)
         assertRow(sheet, 2, "0", "reading", "entryId", "definition1\ndefinition2", "type1\ntype2")
     }
 
     @Test
     fun itShouldSortAndExportMultipleEntries() {
-        val result = exporter.export(Entries(setOf(sampleEntry, anotherEntry)))
-        val sheet = result.getSheet("Vocabulary")
+        val result = exporter.export(multipleEntries)
+        val sheet = result.getSheet("N5 Vocabulary")
         assertHeader(sheet)
         assertRow(sheet, 2, "0", "anotherReading", "anotherEntryId", "definition1\ndefinition2", "type1\ntype2")
         assertRow(sheet, 3, "1", "reading", "entryId", "definition1\ndefinition2", "type1\ntype2")
+        val anotherLevelSheet = result.getSheet("N4 Vocabulary")
+        assertHeader(anotherLevelSheet)
+        assertRow(anotherLevelSheet, 2, "0", "anotherLevelReading", "anotherLevelEntryId", "definition1\ndefinition2", "type1\ntype2")
     }
 
     private fun assertHeader(sheet: Sheet) {
