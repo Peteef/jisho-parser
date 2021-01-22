@@ -1,5 +1,6 @@
 package pl.peteef.jishoparser.export.text
 
+import pl.peteef.jishoparser.client.JlptLevel
 import pl.peteef.jishoparser.data.WordEntry
 
 data class TextEntries(
@@ -22,16 +23,18 @@ data class TextWordEntry(
     val reading: String,
     val kanji: String,
     val definitions: Set<String>,
-    val types: Set<String>
+    val types: Set<String>,
+    val jlpt: JlptLevel
 ) {
     companion object {
-        fun fromDomain(responseValue: WordEntry, id: Int): TextWordEntry {
+        fun fromDomain(domain: WordEntry, id: Int): TextWordEntry {
             return TextWordEntry(
                 id,
-                responseValue.reading,
-                if (responseValue.word.isEmpty()) responseValue.word else responseValue.id,
-                responseValue.definitions,
-                responseValue.types
+                domain.reading,
+                if (domain.word.isEmpty()) domain.word else domain.id,
+                domain.definitions,
+                domain.types,
+                domain.jlpt
             )
         }
     }
@@ -39,7 +42,7 @@ data class TextWordEntry(
     override fun toString(): String {
         val formatDefinitions: (Set<String>) -> String = { d -> d.joinToString(separator = "\n") { "|        - $it" } }
         return """
-            |$id: $reading ($kanji)
+            |$id: $reading ($kanji) <$jlpt>
             |     Type: ${types.joinToString()}
             |     Definitions:
             |     ${formatDefinitions(definitions)}

@@ -1,13 +1,12 @@
 package pl.peteef.jishoparser.export.spreadsheet
 
-import pl.peteef.jishoparser.test.multipleEntries
-import pl.peteef.jishoparser.test.noEntries
 import org.apache.poi.ss.usermodel.Row.MissingCellPolicy.RETURN_BLANK_AS_NULL
 import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.ss.util.CellAddress
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import pl.peteef.jishoparser.test.singleEntry
+import pl.peteef.jishoparser.data.Entries
+import pl.peteef.jishoparser.test.*
 
 internal class SpreadsheetExporterTest {
     private val exporter = SpreadsheetExporter
@@ -30,7 +29,7 @@ internal class SpreadsheetExporterTest {
 
     @Test
     fun itShouldSortAndExportMultipleEntries() {
-        val result = exporter.export(multipleEntries)
+        val result = exporter.export(Entries(setOf(sampleEntry, anotherEntry)))
         val sheet = result.getSheet("Vocabulary")
         assertHeader(sheet)
         assertRow(sheet, 2, "0", "anotherReading", "anotherEntryId", "definition1\ndefinition2", "type1\ntype2")

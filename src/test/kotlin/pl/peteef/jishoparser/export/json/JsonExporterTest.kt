@@ -1,10 +1,9 @@
 package pl.peteef.jishoparser.export.json
 
-import pl.peteef.jishoparser.test.multipleEntries
-import pl.peteef.jishoparser.test.noEntries
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import pl.peteef.jishoparser.test.singleEntry
+import pl.peteef.jishoparser.data.Entries
+import pl.peteef.jishoparser.test.*
 
 internal class JsonExporterTest {
     private val exporter = JsonExporter
@@ -82,7 +81,7 @@ internal class JsonExporterTest {
             |  "count": 2
             |}
         """.trimMargin()
-        val result = exporter.export(multipleEntries)
+        val result = exporter.export(Entries(setOf(sampleEntry, anotherEntry)))
         Assertions.assertEquals(expected, result)
     }
 }

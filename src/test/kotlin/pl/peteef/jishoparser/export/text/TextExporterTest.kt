@@ -28,7 +28,7 @@ internal class TextExporterTest {
             |Total: 1
             |-------------
             |
-            |0: reading (entryId)
+            |0: reading (entryId) <N5>
             |     Type: type1, type2
             |     Definitions:
             |        - definition1
@@ -38,19 +38,25 @@ internal class TextExporterTest {
     }
 
     @Test
-    fun itShouldSortAndExportMultipleEntries() {
+    fun itShouldSortByAndExportMultipleEntries() {
         val result = exporter.export(multipleEntries)
         val expected = """
-            |Total: 2
+            |Total: 3
             |-------------
             |
-            |0: anotherReading (anotherEntryId)
+            |0: anotherReading (anotherEntryId) <N5>
             |     Type: type1, type2
             |     Definitions:
             |        - definition1
             |        - definition2
             |
-            |1: reading (entryId)
+            |1: reading (entryId) <N5>
+            |     Type: type1, type2
+            |     Definitions:
+            |        - definition1
+            |        - definition2
+            |
+            |2: anotherLevelReading (anotherLevelEntryId) <N4>
             |     Type: type1, type2
             |     Definitions:
             |        - definition1
