@@ -18,12 +18,29 @@ class Arguments(parser: ArgParser) {
         help = "processing type [default --text-to-file]"
     ).default(TEXT_TO_FILE)
 
-    val jlptLevel by parser.mapping(
-        "--jlpt5" to N5,
-        "--jlpt4" to N4,
-        "--jlpt3" to N3,
-        "--jlpt2" to N2,
-        "--jlpt1" to N1,
-        help = "JLPT Levels [default --jlpt5] (for now only one per run)"
-    ).default(N5)
+    private val jlpt5 by parser.mapping("--jlpt5" to N5,
+        help = "JLPT N5 Level [default, if none selected]"
+    ).default(null)
+
+    private val jlpt4 by parser.mapping("--jlpt4" to N4,
+        help = "JLPT N4 Level [default --jlpt5 taken, if none selected]"
+    ).default(null)
+
+    private val jlpt3 by parser.mapping("--jlpt3" to N3,
+        help = "JLPT N3 Level [default --jlpt5 taken, if none selected]"
+    ).default(null)
+
+    private val jlpt2 by parser.mapping("--jlpt2" to N2,
+        help = "JLPT N2 Level [default --jlpt5 taken, if none selected]"
+    ).default(null)
+
+    private val jlpt1 by parser.mapping("--jlpt1" to N1,
+        help = "JLPT N1 Level [default --jlpt5 taken, if none selected]"
+    ).default(null)
+
+    private val jlptAll by parser.mapping("--jlpt-all" to setOf(N5, N4, N3, N2, N1),
+        help = "All JLPT Levels (it will override single selections)"
+    ).default(setOf())
+
+    val jlptLevels = if(jlptAll.isNotEmpty()) jlptAll else setOf(jlpt5, jlpt4, jlpt3, jlpt2, jlpt1).filterNotNull().toSet()
 }
