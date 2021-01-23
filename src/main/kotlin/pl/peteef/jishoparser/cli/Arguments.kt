@@ -42,5 +42,5 @@ class Arguments(parser: ArgParser) {
         help = "All JLPT Levels (it will override single selections)"
     ).default(setOf())
 
-    val jlptLevels = if(jlptAll.isNotEmpty()) jlptAll else setOf(jlpt5, jlpt4, jlpt3, jlpt2, jlpt1).filterNotNull().toSet()
+    val jlptLevels = if(jlptAll.isNotEmpty()) jlptAll else setOf(jlpt5, jlpt4, jlpt3, jlpt2, jlpt1).filterNotNull().toSet().ifEmpty { setOf(N5) }
 }
