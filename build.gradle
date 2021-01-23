@@ -17,6 +17,7 @@ dependencies {
     implementation "com.xenomachina:kotlin-argparser:$argparserVersion"
     implementation "org.apache.poi:poi:$poiVersion"
     implementation "org.apache.poi:poi-ooxml:$poiVersion"
+    implementation "com.andree-surya:moji4j:$moji4jVersion"
 
     testImplementation platform("org.junit:junit-bom:$junitVersion")
     testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"

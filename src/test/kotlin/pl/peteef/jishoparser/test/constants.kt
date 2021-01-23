@@ -12,9 +12,9 @@ val position = Position("entryId", listOf(japaneseWord), listOf(definition))
 val pageEntity = PageEntity(setOf(position))
 val response = mapOf(N5 to listOf(pageEntity))
 
-val sampleEntry = WordEntry("entryId", "word", "reading", setOf("definition1", "definition2"), setOf("type1", "type2"), N5)
-val anotherEntry = WordEntry("anotherEntryId", "anotherWord", "anotherReading", setOf("definition1", "definition2"), setOf("type1", "type2"), N5)
-val anotherLevelEntry = WordEntry("anotherLevelEntryId", "anotherLevelWord", "anotherLevelReading", setOf("definition1", "definition2"), setOf("type1", "type2"), N4)
+val sampleEntry = WordEntry("entryId", "word", "reading", "romaji", setOf("definition1", "definition2"), setOf("type1", "type2"), N5)
+val anotherEntry = WordEntry("anotherEntryId", "anotherWord", "anotherReading", "anotherRomaji", setOf("definition1", "definition2"), setOf("type1", "type2"), N5)
+val anotherLevelEntry = WordEntry("anotherLevelEntryId", "anotherLevelWord", "anotherLevelReading", "anotherLevelRomaji", setOf("definition1", "definition2"), setOf("type1", "type2"), N4)
 
 val noEntries = Entries(setOf())
 val singleEntry = Entries(setOf(sampleEntry))

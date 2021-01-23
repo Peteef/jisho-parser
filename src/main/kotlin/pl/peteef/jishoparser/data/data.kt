@@ -3,6 +3,7 @@ package pl.peteef.jishoparser.data
 import pl.peteef.jishoparser.client.JlptLevel
 import pl.peteef.jishoparser.client.PageEntity
 import pl.peteef.jishoparser.client.Position
+import pl.peteef.jishoparser.data.romaji.ReadingRomanizer.toRomaji
 
 data class Entries (val entries: Set<WordEntry>) {
     companion object {
@@ -20,6 +21,7 @@ data class WordEntry(
     val id: String,
     val word: String,
     val reading: String,
+    val romaji: String,
     val definitions: Set<String>,
     val types: Set<String>,
     val jlpt: JlptLevel
@@ -32,6 +34,7 @@ data class WordEntry(
                 responseValue.slug,
                 firstWord.word.orEmpty(),
                 firstWord.reading,
+                toRomaji(firstWord.reading),
                 firstDefinition.englishDefinitions,
                 firstDefinition.partsOfSpeech,
                 jlptLevel
