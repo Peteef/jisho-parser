@@ -28,7 +28,7 @@ For list of available arguments use `--help`. These are some important arguments
 
 |Argument(s)|Default|Description|
 |-----------|-------|-----------|
-|`--jlpt5` / `--jlpt4` / `--jlpt3` / `--jlpt2` / `--jlpt1`|`--jlpt5`|JLPT level (at this moment it's only possible to select one per application run).
+|`--jlpt5` / `--jlpt4` / `--jlpt3` / `--jlpt2` / `--jlpt1` / `--jlpt-all`|`--jlpt5`|JLPT levels (multiple choose possible).
 
 **Output formats:**
 
