@@ -9,7 +9,7 @@ import pl.peteef.jishoparser.export.Exporting
 object JsonExporter : Exporting<String> {
     private val serializer: Gson = GsonBuilder().setPrettyPrinting().create()
 
-    override fun export(data: Entries): String {
+    override fun export(data: Entries, withRomaji: Boolean): String {
         val mapped = prepareSort(data.entries)
             .mapIndexed { i, el -> JsonWordEntry.fromDomain(el, i) }
             .toList()

@@ -4,6 +4,7 @@ import pl.peteef.jishoparser.data.Entries
 import pl.peteef.jishoparser.export.json.JsonExporter
 import pl.peteef.jishoparser.export.spreadsheet.SpreadsheetExporter
 import pl.peteef.jishoparser.export.text.TextExporter
+import pl.peteef.jishoparser.flow.ProcessingSettings
 import pl.peteef.jishoparser.processing.ProcessingType.*
 import pl.peteef.jishoparser.save.ExcelFileSaver
 import pl.peteef.jishoparser.save.FileSaver
@@ -17,8 +18,8 @@ object Processor {
 
     fun supports(processingType: ProcessingType): Boolean = getStrategy(processingType) !== null
 
-    fun process(data: Entries, processingType: ProcessingType, outputFilename: String) {
-        getStrategy(processingType)?.process(data, outputFilename)
+    fun process(data: Entries, settings: ProcessingSettings) {
+        getStrategy(settings.processingType)?.process(data, settings.outputFilename, settings.withRomaji)
     }
 
     private fun getStrategy(processingType: ProcessingType): Processing? {

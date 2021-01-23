@@ -18,6 +18,10 @@ class Arguments(parser: ArgParser) {
         help = "processing type [default --text-to-file]"
     ).default(TEXT_TO_FILE)
 
+    val withRomaji by parser.flagging(
+        "-r", "--romaji", help = "Include romaji reading [default false]"
+    ).default(false)
+
     private val jlpt5 by parser.mapping("--jlpt5" to N5,
         help = "JLPT N5 Level [default, if none selected]"
     ).default(null)

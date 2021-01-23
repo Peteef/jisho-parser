@@ -29,7 +29,7 @@ class Job internal constructor(
 
     private fun process(entries: Entries) {
         if (processor.supports(processingSettings.processingType)) {
-           processor.process(entries, processingSettings.processingType, processingSettings.outputFilename)
+           processor.process(entries, processingSettings)
         } else {
             throw IllegalArgumentException()
         }

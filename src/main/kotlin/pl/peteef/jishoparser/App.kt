@@ -17,7 +17,7 @@ object App {
     private fun run(arguments: Arguments) {
         println("Processing...")
         val searchCriteria = SearchCriteria(arguments.jlptLevels)
-        val processingSettings = ProcessingSettings(arguments.filename, arguments.processingType)
+        val processingSettings = ProcessingSettings(arguments.filename, arguments.processingType, arguments.withRomaji)
         Controller.newJob(searchCriteria, processingSettings).perform()
         println("Done.")
     }

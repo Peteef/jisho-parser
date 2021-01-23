@@ -9,5 +9,6 @@ data class SearchCriteria(
 
 data class ProcessingSettings(
     val outputFilename: String,
-    val processingType: ProcessingType
+    val processingType: ProcessingType,
+    val withRomaji: Boolean
 )

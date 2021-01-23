@@ -11,8 +11,8 @@ class ProcessingStrategy<T>(
 ) : Processing {
     override fun isApplicable(processingType: ProcessingType): Boolean = type === processingType
 
-    override fun process(data: Entries, filename: String) {
-        val toBeSaved = exporter.export(data)
+    override fun process(data: Entries, filename: String, withRomaji: Boolean) {
+        val toBeSaved = exporter.export(data, withRomaji)
         saver.save(toBeSaved, filename)
     }
 }

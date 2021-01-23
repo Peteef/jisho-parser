@@ -17,7 +17,7 @@ internal class JsonExporterTest {
             |  "count": 0
             |}
         """.trimMargin()
-        val result = exporter.export(noEntries)
+        val result = exporter.export(noEntries, false)
         Assertions.assertEquals(expected, result)
     }
 
@@ -44,7 +44,7 @@ internal class JsonExporterTest {
             |  "count": 1
             |}
         """.trimMargin()
-        val result = exporter.export(singleEntry)
+        val result = exporter.export(singleEntry, false)
         Assertions.assertEquals(expected, result)
     }
 
@@ -99,7 +99,7 @@ internal class JsonExporterTest {
             |  "count": 3
             |}
         """.trimMargin()
-        val result = exporter.export(multipleEntries)
+        val result = exporter.export(multipleEntries, false)
         Assertions.assertEquals(expected, result)
     }
 }

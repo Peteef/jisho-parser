@@ -11,7 +11,7 @@ internal class TextExporterTest {
 
     @Test
     fun itShouldExportNoEntries() {
-        val result = exporter.export(noEntries)
+        val result = exporter.export(noEntries, false)
         val expected = """
             |Total: 0
             |-------------
@@ -23,7 +23,7 @@ internal class TextExporterTest {
 
     @Test
     fun itShouldExportSingleEntry() {
-        val result = exporter.export(singleEntry)
+        val result = exporter.export(singleEntry, false)
         val expected = """
             |Total: 1
             |-------------
@@ -39,7 +39,7 @@ internal class TextExporterTest {
 
     @Test
     fun itShouldSortByAndExportMultipleEntries() {
-        val result = exporter.export(multipleEntries)
+        val result = exporter.export(multipleEntries, false)
         val expected = """
             |Total: 3
             |-------------

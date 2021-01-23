@@ -14,7 +14,7 @@ object SpreadsheetExporter : Exporting<Workbook> {
     private const val START_ROW = 0
     private const val START_COLUMN = 0
 
-    override fun export(data: Entries): Workbook {
+    override fun export(data: Entries, withRomaji: Boolean): Workbook {
         val workbook: Workbook = XSSFWorkbook()
 
         val mappedPerLevel = prepareData(data)

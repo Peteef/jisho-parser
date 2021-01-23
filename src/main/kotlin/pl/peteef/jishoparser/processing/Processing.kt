@@ -4,5 +4,5 @@ import pl.peteef.jishoparser.data.Entries
 
 interface Processing {
     fun isApplicable(processingType: ProcessingType): Boolean
-    fun process(data: Entries, filename: String)
+    fun process(data: Entries, filename: String, withRomaji: Boolean)
 }

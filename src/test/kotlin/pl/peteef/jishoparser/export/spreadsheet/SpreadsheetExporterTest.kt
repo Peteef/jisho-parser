@@ -5,7 +5,6 @@ import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.ss.util.CellAddress
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import pl.peteef.jishoparser.data.Entries
 import pl.peteef.jishoparser.test.*
 
 internal class SpreadsheetExporterTest {
@@ -13,13 +12,13 @@ internal class SpreadsheetExporterTest {
 
     @Test
     fun itShouldExportNoEntries() {
-        val result = exporter.export(noEntries)
+        val result = exporter.export(noEntries, false)
         assertEquals(0, result.numberOfSheets)
     }
 
     @Test
     fun itShouldExportSingleEntry() {
-        val result = exporter.export(singleEntry)
+        val result = exporter.export(singleEntry, false)
         val sheet = result.getSheet("N5 Vocabulary")
         assertHeader(sheet)
         assertRow(sheet, 2, "0", "reading", "entryId", "definition1\ndefinition2", "type1\ntype2")
@@ -27,7 +26,7 @@ internal class SpreadsheetExporterTest {
 
     @Test
     fun itShouldSortAndExportMultipleEntries() {
-        val result = exporter.export(multipleEntries)
+        val result = exporter.export(multipleEntries, false)
         val sheet = result.getSheet("N5 Vocabulary")
         assertHeader(sheet)
         assertRow(sheet, 2, "0", "anotherReading", "anotherEntryId", "definition1\ndefinition2", "type1\ntype2")

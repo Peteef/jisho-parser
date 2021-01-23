@@ -28,16 +28,16 @@ internal class JobTest {
 
     @Test
     fun itShouldPerformJob() {
-        val job = Job(SearchCriteria(setOf(N5)), ProcessingSettings("filename", JSON_TO_FILE))
+        val job = Job(SearchCriteria(setOf(N5)), ProcessingSettings("filename", JSON_TO_FILE, false))
         every { ReadingRomanizer.toRomaji(sampleEntry.reading) }.returns(sampleEntry.romaji)
         job.perform()
         verify(exactly = 1) { HttpClient.get(any()) }
-        verify(exactly = 1) { Processor.process(singleEntry, JSON_TO_FILE, "filename") }
+        verify(exactly = 1) { Processor.process(singleEntry, ProcessingSettings("filename", JSON_TO_FILE,false)) }
     }
 
     @Test
     fun itShouldThrowErrorWhenNotSupportedProcessType() {
-        val job = Job(SearchCriteria(setOf(N5)), ProcessingSettings("filename", JSON_TO_FILE))
+        val job = Job(SearchCriteria(setOf(N5)), ProcessingSettings("filename", JSON_TO_FILE, false))
         every { Processor.supports(JSON_TO_FILE) }.returns(false)
         val exception = assertThrows(IllegalArgumentException::class.java) { job.perform() }
         assertNotNull(exception)
