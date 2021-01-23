@@ -11,7 +11,7 @@ object JsonExporter : Exporting<String> {
 
     override fun export(data: Entries, withRomaji: Boolean): String {
         val mapped = prepareSort(data.entries)
-            .mapIndexed { i, el -> JsonWordEntry.fromDomain(el, i) }
+            .mapIndexed { i, el -> JsonWordEntry.fromDomain(el, i, withRomaji) }
             .toList()
         return serialize(JsonEntries(mapped, mapped.size))
     }

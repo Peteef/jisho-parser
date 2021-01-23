@@ -102,4 +102,32 @@ internal class JsonExporterTest {
         val result = exporter.export(multipleEntries, false)
         Assertions.assertEquals(expected, result)
     }
+
+    @Test
+    fun itShouldExportWithRomaji() {
+        val expected = """
+            |{
+            |  "data": [
+            |    {
+            |      "id": 0,
+            |      "reading": "reading",
+            |      "kanji": "entryId",
+            |      "romaji": "romaji",
+            |      "definitions": [
+            |        "definition1",
+            |        "definition2"
+            |      ],
+            |      "types": [
+            |        "type1",
+            |        "type2"
+            |      ],
+            |      "jlpt": "JLPT-N5"
+            |    }
+            |  ],
+            |  "count": 1
+            |}
+        """.trimMargin()
+        val result = exporter.export(singleEntry, true)
+        Assertions.assertEquals(expected, result)
+    }
 }
