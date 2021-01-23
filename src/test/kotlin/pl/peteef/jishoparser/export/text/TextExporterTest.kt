@@ -64,4 +64,20 @@ internal class TextExporterTest {
         """.trimMargin()
         assertEquals(expected, result)
     }
+
+    @Test
+    fun itShouldExportWithRomaji() {
+        val result = exporter.export(singleEntry, true)
+        val expected = """
+            |Total: 1
+            |-------------
+            |
+            |0: reading (entryId) [romaji] <N5>
+            |     Type: type1, type2
+            |     Definitions:
+            |        - definition1
+            |        - definition2
+        """.trimMargin()
+        assertEquals(expected, result)
+    }
 }

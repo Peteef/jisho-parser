@@ -7,7 +7,7 @@ import pl.peteef.jishoparser.export.Exporting
 object TextExporter : Exporting<String> {
     override fun export(data: Entries, withRomaji: Boolean): String {
         val mapped = prepareSort(data.entries)
-            .mapIndexed { i, el -> TextWordEntry.fromDomain(el, i) }
+            .mapIndexed { i, el -> TextWordEntry.fromDomain(el, i, withRomaji) }
             .toList()
         return serialize(TextEntries(mapped, mapped.size))
     }
