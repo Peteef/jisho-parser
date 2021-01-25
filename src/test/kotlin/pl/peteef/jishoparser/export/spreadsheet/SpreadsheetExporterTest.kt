@@ -36,8 +36,20 @@ internal class SpreadsheetExporterTest {
         assertRow(anotherLevelSheet, 2, "0", "anotherLevelReading", "anotherLevelEntryId", "definition1\ndefinition2", "type1\ntype2")
     }
 
+    @Test
+    fun itShouldExportWithRomaji() {
+        val result = exporter.export(singleEntry, true)
+        val sheet = result.getSheet("N5 Vocabulary")
+        assertHeaderWithRomaji(sheet)
+        assertRowWithRomaji(sheet, 2, "0", "reading", "entryId", "romaji", "definition1\ndefinition2", "type1\ntype2")
+    }
+
     private fun assertHeader(sheet: Sheet) {
         assertRow(sheet, 1, "Id", "Reading", "Kanji", "Definitions", "Types")
+    }
+
+    private fun assertHeaderWithRomaji(sheet: Sheet) {
+        assertRowWithRomaji(sheet, 1, "Id", "Reading", "Kanji", "Romaji", "Definitions", "Types")
     }
 
     private fun assertRow(sheet: Sheet, row: Int, id: String = "", reading: String = "", kanji: String = "", definitions: String = "", types: String = "") {
@@ -46,6 +58,15 @@ internal class SpreadsheetExporterTest {
         assertCell(sheet, CellAddress("C$row"), kanji)
         assertCell(sheet, CellAddress("D$row"), definitions)
         assertCell(sheet, CellAddress("E$row"), types)
+    }
+
+    private fun assertRowWithRomaji(sheet: Sheet, row: Int, id: String = "", reading: String = "", kanji: String = "", romaji: String = "", definitions: String = "", types: String = "") {
+        assertCell(sheet, CellAddress("A$row"), id)
+        assertCell(sheet, CellAddress("B$row"), reading)
+        assertCell(sheet, CellAddress("C$row"), kanji)
+        assertCell(sheet, CellAddress("D$row"), romaji)
+        assertCell(sheet, CellAddress("E$row"), definitions)
+        assertCell(sheet, CellAddress("F$row"), types)
     }
 
     private fun assertCell(sheet: Sheet, cellAddress: CellAddress, expectedValue: String) {

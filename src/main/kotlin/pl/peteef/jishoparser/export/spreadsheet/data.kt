@@ -11,17 +11,19 @@ data class SpreadsheetWordEntry(
     val id: Int,
     val reading: String,
     val kanji: String,
+    val romaji: String,
     val definitions: Set<String>,
     val types: Set<String>
 ) {
     companion object {
-        fun fromDomain(responseValue: WordEntry, id: Int): SpreadsheetWordEntry {
+        fun fromDomain(domain: WordEntry, id: Int): SpreadsheetWordEntry {
             return SpreadsheetWordEntry(
                 id,
-                responseValue.reading,
-                if (responseValue.word.isEmpty()) responseValue.word else responseValue.id,
-                responseValue.definitions,
-                responseValue.types
+                domain.reading,
+                if (domain.word.isEmpty()) domain.word else domain.id,
+                domain.romaji,
+                domain.definitions,
+                domain.types
             )
         }
     }
