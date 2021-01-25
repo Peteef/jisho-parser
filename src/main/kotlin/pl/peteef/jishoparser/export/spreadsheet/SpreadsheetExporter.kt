@@ -52,7 +52,7 @@ object SpreadsheetExporter : Exporting<Workbook> {
         sheet.setColumnWidth(START_COLUMN, 3000)
         sheet.setColumnWidth(START_COLUMN + 1, 6000)
         sheet.setColumnWidth(START_COLUMN + 2, 6000)
-        if (withRomaji) { sheet.setColumnWidth(START_COLUMN + 3, 6000) }
+        if (withRomaji) { sheet.setColumnWidth(START_COLUMN + 3, 8000) }
         sheet.setColumnWidth(START_COLUMN + bulletOffset, 15000)
         sheet.setColumnWidth(START_COLUMN + bulletOffset + 1, 15000)
     }
