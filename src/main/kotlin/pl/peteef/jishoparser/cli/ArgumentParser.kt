@@ -5,7 +5,7 @@ import com.xenomachina.argparser.DefaultHelpFormatter
 
 object ArgumentParser {
     private val PROLOGUE = """
-        |Welcome to the Jisho Parser v0.2!
+        |Welcome to the Jisho Parser v0.3!
         |This is the very beginning of the project making Japanese study a little bit easier.
         |Using this simple program you can convert word entries taken from Jisho.org into a format more suitable to learn vocabulary.
         |よろしくお願いします！
