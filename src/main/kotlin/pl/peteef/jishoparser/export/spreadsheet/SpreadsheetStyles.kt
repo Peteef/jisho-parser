@@ -26,6 +26,7 @@ class SpreadsheetStyles(private val workbook: Workbook) {
     private fun readingStyle(): CellStyle {
         val style = workbook.createCellStyle()
         style.verticalAlignment = VerticalAlignment.CENTER
+        style.wrapText = true
 
         val font = workbook.createFont()
         font.fontName = "Arial"
@@ -39,6 +40,7 @@ class SpreadsheetStyles(private val workbook: Workbook) {
     private fun wordStyle(): CellStyle {
         val style = workbook.createCellStyle()
         style.verticalAlignment = VerticalAlignment.CENTER
+        style.wrapText = true
 
         val font = workbook.createFont()
         font.fontName = "Arial"

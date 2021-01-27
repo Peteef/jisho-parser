@@ -52,9 +52,9 @@ object SpreadsheetExporter : Exporting<Workbook> {
         sheet.setColumnWidth(START_COLUMN, 3000)
         sheet.setColumnWidth(START_COLUMN + 1, 6000)
         sheet.setColumnWidth(START_COLUMN + 2, 6000)
-        if (withRomaji) { sheet.setColumnWidth(START_COLUMN + 3, 8000) }
-        sheet.setColumnWidth(START_COLUMN + bulletOffset, 15000)
-        sheet.setColumnWidth(START_COLUMN + bulletOffset + 1, 15000)
+        if (withRomaji) { sheet.setColumnWidth(START_COLUMN + 3, 6000) }
+        sheet.setColumnWidth(START_COLUMN + bulletOffset, 10000)
+        sheet.setColumnWidth(START_COLUMN + bulletOffset + 1, 10000)
     }
 
     private fun createHeader(sheet: Sheet, styles: SpreadsheetStyles, withRomaji: Boolean) {
@@ -128,6 +128,6 @@ object SpreadsheetExporter : Exporting<Workbook> {
     private fun bulletOffset(withRomaji: Boolean): Int = if (withRomaji) 4 else 3
 
     private fun formatBullets(elements: Set<String>): String {
-        return elements.joinToString(separator = "\n")
+        return elements.joinToString(separator = "\n") { "- $it" }
     }
 }
