@@ -23,6 +23,7 @@ internal class JobTest {
         mockkObject(HttpClient)
         every { HttpClient.get(any()) }.returns(response)
         mockkObject(Processor)
+        every { Processor.process(any(), any()) }.answers { /* no-op */ }
         mockkObject(ReadingRomanizer)
     }
 
