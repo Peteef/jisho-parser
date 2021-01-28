@@ -14,8 +14,11 @@ class Job internal constructor(
     private val processor = Processor
 
     fun perform() {
+        println("Obtaining data...")
         val data = fetchData()
+        println("Transforming data...")
         val mapped = mapData(data)
+        println("Exporting data...")
         process(mapped)
     }
 
