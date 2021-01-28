@@ -31,14 +31,18 @@ data class WordEntry(
             val firstWord = responseValue.japanese.first()
             val firstDefinition = responseValue.senses.first()
             return WordEntry(
-                responseValue.slug,
-                firstWord.word.orEmpty(),
+                responseValue.slug.removeNumberSuffix(),
+                firstWord.word?.removeNumberSuffix().orEmpty(),
                 firstWord.reading,
                 toRomaji(firstWord.reading),
                 firstDefinition.englishDefinitions,
                 firstDefinition.partsOfSpeech,
                 jlptLevel
             )
+        }
+
+        private fun String.removeNumberSuffix(): String {
+            return this.replace(Regex("^*-\\d$"), "").trim()
         }
     }
 }
