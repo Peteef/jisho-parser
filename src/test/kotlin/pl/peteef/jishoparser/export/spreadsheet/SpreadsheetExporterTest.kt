@@ -5,7 +5,9 @@ import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.ss.util.CellAddress
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import pl.peteef.jishoparser.test.*
+import pl.peteef.jishoparser.test.multipleEntries
+import pl.peteef.jishoparser.test.noEntries
+import pl.peteef.jishoparser.test.singleEntry
 
 internal class SpreadsheetExporterTest {
     private val exporter = SpreadsheetExporter
@@ -21,7 +23,7 @@ internal class SpreadsheetExporterTest {
         val result = exporter.export(singleEntry, false)
         val sheet = result.getSheet("N5 Vocabulary")
         assertHeader(sheet)
-        assertRow(sheet, 2, "0", "reading", "entryId", "- definition1\n- definition2", "- type1\n- type2")
+        assertRow(sheet, 2, "1", "reading", "entryId", "- definition1\n- definition2", "- type1\n- type2")
     }
 
     @Test
@@ -29,11 +31,11 @@ internal class SpreadsheetExporterTest {
         val result = exporter.export(multipleEntries, false)
         val sheet = result.getSheet("N5 Vocabulary")
         assertHeader(sheet)
-        assertRow(sheet, 2, "0", "anotherReading", "anotherEntryId", "- definition1\n- definition2", "- type1\n- type2")
-        assertRow(sheet, 3, "1", "reading", "entryId", "- definition1\n- definition2", "- type1\n- type2")
+        assertRow(sheet, 2, "1", "anotherReading", "anotherEntryId", "- definition1\n- definition2", "- type1\n- type2")
+        assertRow(sheet, 3, "2", "reading", "entryId", "- definition1\n- definition2", "- type1\n- type2")
         val anotherLevelSheet = result.getSheet("N4 Vocabulary")
         assertHeader(anotherLevelSheet)
-        assertRow(anotherLevelSheet, 2, "0", "anotherLevelReading", "anotherLevelEntryId", "- definition1\n- definition2", "- type1\n- type2")
+        assertRow(anotherLevelSheet, 2, "1", "anotherLevelReading", "anotherLevelEntryId", "- definition1\n- definition2", "- type1\n- type2")
     }
 
     @Test
@@ -41,7 +43,7 @@ internal class SpreadsheetExporterTest {
         val result = exporter.export(singleEntry, true)
         val sheet = result.getSheet("N5 Vocabulary")
         assertHeaderWithRomaji(sheet)
-        assertRowWithRomaji(sheet, 2, "0", "reading", "entryId", "romaji", "- definition1\n- definition2", "- type1\n- type2")
+        assertRowWithRomaji(sheet, 2, "1", "reading", "entryId", "romaji", "- definition1\n- definition2", "- type1\n- type2")
     }
 
     private fun assertHeader(sheet: Sheet) {

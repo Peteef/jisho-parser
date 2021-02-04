@@ -1,5 +1,8 @@
 package pl.peteef.jishoparser.export.spreadsheet
 
+import org.apache.poi.ss.usermodel.BorderStyle
+import org.apache.poi.ss.usermodel.BorderStyle.DOTTED
+import org.apache.poi.ss.usermodel.BorderStyle.THICK
 import org.apache.poi.ss.usermodel.CellStyle
 import org.apache.poi.ss.usermodel.VerticalAlignment
 import org.apache.poi.ss.usermodel.Workbook
@@ -20,6 +23,8 @@ class SpreadsheetStyles(private val workbook: Workbook) {
         font.bold = true
         style.setFont(font)
 
+        style.setBorder(THICK)
+
         return style
     }
 
@@ -34,6 +39,8 @@ class SpreadsheetStyles(private val workbook: Workbook) {
         font.bold = true
         style.setFont(font)
 
+        style.setContentBorder(DOTTED)
+
         return style
     }
 
@@ -46,6 +53,8 @@ class SpreadsheetStyles(private val workbook: Workbook) {
         font.fontName = "Arial"
         font.fontHeightInPoints = 18
         style.setFont(font)
+
+        style.setContentBorder(DOTTED)
 
         return style
     }
@@ -60,6 +69,21 @@ class SpreadsheetStyles(private val workbook: Workbook) {
         font.fontHeightInPoints = 14
         style.setFont(font)
 
+        style.setContentBorder(DOTTED)
+
         return style
+    }
+
+    private fun CellStyle.setBorder(style: BorderStyle) {
+        this.borderBottom = style
+        this.borderTop = style
+        this.borderLeft = style
+        this.borderRight = style
+    }
+
+    private fun CellStyle.setContentBorder(style: BorderStyle) {
+        this.borderBottom = style
+        this.borderLeft = style
+        this.borderRight = style
     }
 }

@@ -36,7 +36,7 @@ object SpreadsheetExporter : Exporting<Workbook> {
 
     private fun withLevel(preMapped: Map.Entry<JlptLevel, List<WordEntry>>): Pair<JlptLevel, List<SpreadsheetWordEntry>> {
         return preMapped.key to preMapped.value.sortedBy { it.reading }
-            .mapIndexed { i, el -> SpreadsheetWordEntry.fromDomain(el, i) }
+            .mapIndexed { i, el -> SpreadsheetWordEntry.fromDomain(el, i + 1) }
     }
 
     private fun createSheet(workbook: Workbook, entriesPerLevel: Map.Entry<JlptLevel, List<SpreadsheetWordEntry>>, withRomaji: Boolean) {
@@ -95,7 +95,7 @@ object SpreadsheetExporter : Exporting<Workbook> {
     }
 
     private fun createDataRow(entry: SpreadsheetWordEntry, sheet: Sheet, styles: SpreadsheetStyles, withRomaji: Boolean) {
-        val entryRow: Row = sheet.createRow(START_ROW + 1 + entry.id)
+        val entryRow: Row = sheet.createRow(START_ROW + entry.id)
         val bulletOffset = bulletOffset(withRomaji)
 
         val idCell = entryRow.createCell(START_COLUMN)
