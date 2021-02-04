@@ -1,6 +1,6 @@
 # JishoParser
 
-**Newest version:** `0.3`
+**Newest version:** `0.3.1`
 
 ## Introduction
 This is the very beginning of the JishoParser project which aims to make learning Japanese vocabulary a little bit easier.
